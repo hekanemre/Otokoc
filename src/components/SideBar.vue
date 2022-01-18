@@ -1,26 +1,27 @@
 <template>
-  <div class="basket">
-      <div @click="togglee" class="sepet">Sepeti Özeti {{symbol}} </div>
+  <div class="basketall">
+      <div @click="toggleSummary" class="sepet">Sepet Özeti {{symbol}} </div>
       <div class="sepet-özeti">Sepet</div>
       <div class="products">
         <ul>
           <li v-show="eklendi1()" >Ford Focus Aks {{miktar_1}}  adet Tutarı:{{miktar_1*100}} ₺</li><br v-show="eklendi1()">
-          <li v-show="eklendi2()" >Ford Focus Focus Knuckle{{miktar_2}}  adet Tutarı:{{miktar_2*150}} ₺</li><br v-show="eklendi2()">
-          <li v-show="eklendi3()" >Ford Mondeo Aks {{miktar_3}} adet Tutarı:{{miktar_3*200}} ₺</li><br v-show="eklendi3()">
-          <li v-show="eklendi4()" >Ford Mondeo Knuckle{{miktar_4}} adet Tutarı:{{miktar_4*250}} ₺</li><br v-show="eklendi4()">
-          <li v-show="eklendi5()" >Volvo s40 Aks{{miktar_5}} adet Tutarı:{{miktar_5*300}} ₺</li><br v-show="eklendi5()">
-          <li v-show="eklendi6()" >Volvo s40 Knuckle{{miktar_6}} adet Tutarı:{{miktar_6*350}}₺ </li><br v-show="eklendi6()">
-          <li v-show="eklendi7()" >Vovo s60 Aks {{miktar_7}} adet Tutarı:{{miktar_7*400}} ₺</li><br v-show="eklendi7()">
-          <li v-show="eklendi8()" >Volvo s60 Knuckle{{miktar_8}} adet Tutarı:{{miktar_8*450}} ₺</li><br v-show="eklendi8()">
+          <li v-show="eklendi2()" >Ford Focus Knuckle {{miktar_2}}   adet Tutarı:{{miktar_2*150}} ₺</li><br v-show="eklendi2()">
+          <li v-show="eklendi3()" >Ford Mondeo Aks {{miktar_3}}  adet Tutarı:{{miktar_3*200}} ₺</li><br v-show="eklendi3()">
+          <li v-show="eklendi4()" >Ford Mondeo Knuckle {{miktar_4}}  adet Tutarı:{{miktar_4*250}} ₺</li><br v-show="eklendi4()">
+          <li v-show="eklendi5()" >Volvo s40 Aks {{miktar_5}}  adet Tutarı:{{miktar_5*300}} ₺</li><br v-show="eklendi5()">
+          <li v-show="eklendi6()" >Volvo s40 Knuckle {{miktar_6}}  adet Tutarı:{{miktar_6*350}}₺ </li><br v-show="eklendi6()">
+          <li v-show="eklendi7()" >Vovo s60 Aks {{miktar_7}}  adet Tutarı:{{miktar_7*400}} ₺</li><br v-show="eklendi7()">
+          <li v-show="eklendi8()" >Volvo s60 Knuckle {{miktar_8}}  adet Tutarı:{{miktar_8*450}} ₺</li><br v-show="eklendi8()">
         </ul>
       </div>
+      <div v-if="ShowBasket()">Sepet Tutarı: {{miktar_1*100 + miktar_2*150 + miktar_3*200 + miktar_4*250 + miktar_5*300 + miktar_6*350 + miktar_7*400 + miktar_8*450}} ₺</div>
   </div>
 </template>
 
 <script>
 export default {
     name: "SideBarRight",
-    props: ['miktar_1','miktar_2','miktar_3','miktar_4','miktar_5','miktar_6','miktar_7','miktar_8'],
+    props: ['miktar_1','miktar_2','miktar_3','miktar_4','miktar_5','miktar_6','miktar_7','miktar_8', 'toggleSummary'],
     data () {
     return {
       quantity: 0,
@@ -68,6 +69,11 @@ export default {
       if(this.miktar_8 != 0){
         return true
       }
+    },
+    ShowBasket(){
+      if (this.miktar_1+ this.miktar_2 + this.miktar_3 + this.miktar_4 + this.miktar_5 + this.miktar_6 + this.miktar_7 + this.miktar_8 != 0){
+        return true
+      }
     }
   }
    
@@ -75,9 +81,8 @@ export default {
 </script>
 
 <style>
-.basket{
-    width: 500px;
-    height: 850px;
+.basketall{
+    width: 20%;
     position: fixed;
     background-color: white;
     text-align: center;

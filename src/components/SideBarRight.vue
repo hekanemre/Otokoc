@@ -1,40 +1,38 @@
 <template>
   <div class="basket">
-      <div @click="toggle" class="sepet">{{symbol}} Detaylı Sepeti Göster</div>
+      <div @click="toggleDetail" class="sepet">{{symbol}} Detaylı Sepeti Göster</div>
       <div class="sepet-özeti">Sepet Özeti</div>
       <div class="products">
         <ul>
-          <li v-show="eklendi1()" >Ford Focus...{{miktar_1}}  adet Tutarı:{{miktar_1*100}} ₺</li><br v-show="eklendi1()">
-          <li v-show="eklendi2()" >Ford Focus...{{miktar_2}}  adet Tutarı:{{miktar_2*150}} ₺</li><br v-show="eklendi2()">
-          <li v-show="eklendi3()" >Ford Monde...{{miktar_3}} adet Tutarı:{{miktar_3*200}} ₺</li><br v-show="eklendi3()">
-          <li v-show="eklendi4()" >Ford Monde...{{miktar_4}} adet Tutarı:{{miktar_4*250}} ₺</li><br v-show="eklendi4()">
-          <li v-show="eklendi5()" >Volvo s40...{{miktar_5}} adet Tutarı:{{miktar_5*300}} ₺</li><br v-show="eklendi5()">
-          <li v-show="eklendi6()" >Volvo s40...{{miktar_6}} adet Tutarı:{{miktar_6*350}}₺ </li><br v-show="eklendi6()">
-          <li v-show="eklendi7()" >Vovo s60...{{miktar_7}} adet Tutarı:{{miktar_7*400}} ₺</li><br v-show="eklendi7()">
-          <li v-show="eklendi8()" >Volvo s60...{{miktar_8}} adet Tutarı:{{miktar_8*450}} ₺</li><br v-show="eklendi8()">
+          <li v-show="eklendi1()" >Ford Focus Aks  <span class="sepetSonu">{{miktar_1}}  adet</span></li><br v-show="eklendi1()">
+          <li v-show="eklendi2()" >Ford Focus Knuckle <span class="sepetSonu">{{miktar_2}}  adet</span></li><br v-show="eklendi2()">
+          <li v-show="eklendi3()" >Ford Mondeo Aks <span class="sepetSonu">{{miktar_3}} adet</span></li><br v-show="eklendi3()">
+          <li v-show="eklendi4()" >Ford Mondeo Knuckle <span class="sepetSonu">{{miktar_4}} adet</span></li><br v-show="eklendi4()">
+          <li v-show="eklendi5()" >Volvo s40 Aks <span class="sepetSonu">{{miktar_5}} adet</span></li><br v-show="eklendi5()">
+          <li v-show="eklendi6()" >Volvo s40 Knuckle <span class="sepetSonu">{{miktar_6}} adet</span> </li><br v-show="eklendi6()">
+          <li v-show="eklendi7()" >Vovo s60 Aks <span class="sepetSonu">{{miktar_7}} adet</span></li><br v-show="eklendi7()">
+          <li v-show="eklendi8()" >Volvo s60 Knuckle <span class="sepetSonu">{{miktar_8}} adet</span></li><br v-show="eklendi8()">
         </ul>
       </div>
+      <button @click="removeAll" class="removeAll">Tüm Sepeti Boşalt</button>
   </div>
-  <SideBar
-  v-if="showSidebar"/>
 </template>
 
 <script>
-import SideBar from '@/components/SideBar.vue'
+
 export default {
     name: "SideBarRight",
-    props: ['miktar_1','miktar_2','miktar_3','miktar_4','miktar_5','miktar_6','miktar_7','miktar_8'],
+    props: ['miktar_1','miktar_2','miktar_3','miktar_4','miktar_5','miktar_6','miktar_7','miktar_8','toggleDetail','removeAll'],
     data () {
     return {
-      showSidebar: false,
       quantity: 0,
       isVisibleBasket: true,
       symbol: '<<'
     }
   },
-  methods: {
+  methods: {  
     eklendi1(){
-      if(this.miktar_1!=0){
+      if(this.miktar_1!=0 || this.miktar_1 != ''){
         return true
       }
     },
@@ -72,13 +70,9 @@ export default {
       if(this.miktar_8 != 0){
         return true
       }
-    },
-    toggle(){
-      this.showSidebar = !this.showSidebar
     }
   },
   components: {
-    SideBar
   }     
 }
 </script>
@@ -86,7 +80,6 @@ export default {
 <style>
 .basket{
     width: 15%;
-    height: 850px;
     position: fixed;
     background-color: white;
     text-align: center;
@@ -112,5 +105,11 @@ li{
 ul {
   list-style-type: none;
 }
-
+.sepetSonu{
+  position: fixed;
+  right: 10px;
+}
+.removeAll{
+  cursor: pointer;
+}
 </style>

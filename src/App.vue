@@ -27,7 +27,9 @@ export default {
     return {
       NavigationBar: false,
       HomeBar: false,
-      loginBar: true
+      loginBar: true,
+      userName: '',
+      Password: '',
     }
   },
   methods:{
@@ -87,5 +89,8 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+button{
+  cursor: pointer;
 }
 </style>

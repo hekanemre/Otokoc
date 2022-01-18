@@ -53,7 +53,7 @@
         <div class="resim1">Resim</div>
         <div class="numara1">2</div>
         <div class="ad1">Focus Knuckle</div>
-        <div class="tutar1">200 ₺</div>
+        <div class="tutar1">150 ₺</div>
         <div class="miktar1">
         <input class="2" type="number" min="0" v-model="input2">
         <button @click="sepet2" class="add1">Sepete Ekle</button>
@@ -63,7 +63,7 @@
         <div class="resim2">Resim</div>
         <div class="numara2">3</div>
         <div class="ad2">Mondeo Aks</div>
-        <div class="tutar2">100 ₺</div>
+        <div class="tutar2">200 ₺</div>
         <div class="miktar2">
         <input class="3" type="number" min="0" v-model="input3">
         <button @click="sepet3" class="add2">Sepete Ekle</button>
@@ -73,7 +73,7 @@
         <div class="resim3">Resim</div>
         <div class="numara3">4</div>
         <div class="ad3">Mondeo Knuckle</div>
-        <div class="tutar3">200 ₺</div>
+        <div class="tutar3">250 ₺</div>
         <div class="miktar3">
         <input class="4" type="number" min="0" v-model="input4">
         <button @click="sepet4" class="add3">Sepete Ekle</button>
@@ -83,7 +83,7 @@
         <div class="resim4">Resim</div>
         <div class="numara4">5</div>
         <div class="ad4">s40 Aks</div>
-        <div class="tutar4">100 ₺</div>
+        <div class="tutar4">300 ₺</div>
         <div class="miktar4">
         <input class="5" type="number" min="0" v-model="input5">
         <button @click="sepet5" class="add4">Sepete Ekle</button>
@@ -93,7 +93,7 @@
         <div class="resim5">Resim</div>
         <div class="numara5">6</div>
         <div class="ad5">s40 Knuckle</div>
-        <div class="tutar5">200 ₺</div>
+        <div class="tutar5">350 ₺</div>
         <div class="miktar5">
         <input class="6" type="number" min="0" v-model="input6">
         <button @click="sepet6" class="add5">Sepete Ekle</button>
@@ -103,7 +103,7 @@
         <div class="resim6">Resim</div>
         <div class="numara6">7</div>
         <div class="ad6">s60 Aks</div>
-        <div class="tutar6">100 ₺</div>
+        <div class="tutar6">400 ₺</div>
         <div class="miktar6">
         <input class="7" type="number" min="0" v-model="input7">
         <button @click="sepet7" class="add6">Sepete Ekle</button>
@@ -113,7 +113,7 @@
         <div class="resim7">Resim</div>
         <div class="numara7">8</div>
         <div class="ad7">s60 Knuckle</div>
-        <div class="tutar7">200 ₺</div>
+        <div class="tutar7">450 ₺</div>
         <div class="miktar7">
         <input class="8"  type="number" min="0" v-model="input8">
         <button @click="sepet8" class="add7">Sepete Ekle</button>
@@ -121,6 +121,8 @@
     </div>
   </div>
   <SideBarRight 
+  v-if="showSideBarRight"
+  :toggleDetail="toggleSideBar"
   :miktar_1="value1" 
   :miktar_2="value2"
   :miktar_3 ="value3"
@@ -129,11 +131,25 @@
   :miktar_6 ="value6"
   :miktar_7 ="value7"
   :miktar_8 ="value8"
+  :removeAll="removeItems"
   />
+  <SideBar
+  v-if="showSidebar"
+  :miktar_1 ="value1"
+  :miktar_2="value2"
+  :miktar_3 ="value3"
+  :miktar_4 ="value4"
+  :miktar_5 ="value5"
+  :miktar_6 ="value6"
+  :miktar_7 ="value7"
+  :miktar_8 ="value8"
+  :toggleSummary="toggleSideBarRight"/>
 </template>
 
 <script>
 import SideBarRight from '@/components/SideBarRight.vue'
+import SideBar from '@/components/SideBar.vue'
+
 export default {
   name: "Home",
   data: ()=>{
@@ -158,6 +174,16 @@ export default {
       value6:'',
       value7:'',
       value8:'',
+      input1:'',
+      input2:'',
+      input3:'',
+      input4:'',
+      input5:'',
+      input6:'',
+      input7:'',
+      input8:'',
+      showSideBarRight: true,
+      showSidebar: false
     }
 
   },
@@ -238,6 +264,24 @@ export default {
       sepet8 (){
         this.value8 = this.input8
       },
+      toggleSideBar(){
+        this.showSideBarRight = !this.showSideBarRight
+        this.showSidebar = !this.showSidebar
+      },
+      toggleSideBarRight(){
+        this.showSidebar = !this.showSidebar    
+        this.showSideBarRight = !this.showSideBarRight
+      },
+      removeItems(){
+        this.value1 = 0
+        this.value2 = 0
+        this.value3 = 0
+        this.value4 = 0
+        this.value5 = 0
+        this.value6 = 0
+        this.value7 = 0
+        this.value8 = 0
+      },
       findPart(){
         if (this.partValue=='1'){
           this.isVisibleFocus=true
@@ -315,7 +359,8 @@ export default {
       }
   },
   components: {
-    SideBarRight
+    SideBarRight,
+    SideBar
   },
 };
 </script>
@@ -433,5 +478,8 @@ li:hover{
 }
 .tüm-parçalar{
   margin-top: 5px;
+}
+button{
+  cursor: pointer;
 }
 </style>
